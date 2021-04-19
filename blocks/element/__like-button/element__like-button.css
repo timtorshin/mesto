@@ -5,6 +5,7 @@
   height: 19px;
   cursor: pointer;
   border: none;
+  outline: none;
   background-image: url(../../../images/elements-like-icon.svg);
   background-size: cover;
   background-color: #fff;
