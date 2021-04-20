@@ -7,9 +7,14 @@
   border: none;
   outline: none;
   box-sizing: border-box;
-  background-image: url(../../../images/popup-save-button.svg);
-  background-size: cover;
-  background-color: #fff;
+  background-color: #000;
+  border-radius: 2px;
+  color: #fff;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
   transition: opacity .5s ease;
 }
 
@@ -21,6 +26,7 @@
   .popup__submit-button {
     margin-top: 15px;
     height: 46px;
-    background-image: url(../../../images/popup-save-button-mobile.svg);
+    font-size: 14px;
+    line-height: 17px;
   }
 }
