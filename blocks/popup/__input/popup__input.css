@@ -15,7 +15,3 @@
   white-space: nowrap;
   overflow: hidden;
 }
-
-.popup__input::placeholder {
-  color: #000;
-}

@@ -25,64 +25,54 @@
     </section>
 
     <section class="elements">
-      <article class="element">
-        <img src="./images/elements-karachaevsk.jpg" alt="Фотография храма в Карачаевске" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__title">Карачаевск</h2>
-          <button type="button" aria-label="Поставить лайк" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/elements-elbrus.jpg" alt="Фотография горы Эльбрус на горизонте" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button type="button" aria-label="Поставить лайк" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/elements-dombai.jpg" alt="Фотография горного хребта на Домбае" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__title">Домбай</h2>
-          <button type="button" aria-label="Поставить лайк" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/elements-elbrus.jpg" alt="Фотография горы Эльбрус на горизонте" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__title">Гора Эльбрус</h2>
-          <button type="button" aria-label="Поставить лайк" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/elements-dombai.jpg" alt="Фотография горного хребта на Домбае" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__title">Домбай</h2>
-          <button type="button" aria-label="Поставить лайк" class="element__like-button"></button>
-        </div>
-      </article>
-      <article class="element">
-        <img src="./images/elements-karachaevsk.jpg" alt="Фотография храма в Карачаевске" class="element__image">
-        <div class="element__caption">
-          <h2 class="element__title">Карачаево-Черкесия</h2>
-          <button type="button" aria-label="Поставить лайк" class="element__like-button"></button>
-        </div>
-      </article>
+      <template id="element-template">
+        <article class="element">
+          <img class="element__image">
+          <div class="element__caption">
+            <h2 class="element__title"></h2>
+            <button type="button" aria-label="Поставить лайк" class="element__like-button"></button>
+          </div>
+          <button type="button" aria-label="Удалить фотографию" class="element__delete-button"></button>
+        </article>
+      </template>
     </section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2021 Mesto Russia</p>
   </footer>
-  <div class="popup">
+
+  <div class="popup popup_type_edit">
     <div class="popup__container">
-      <button type="button" aria-label="Закрыть попап" class="popup__close-button"></button>
+      <button type="button" aria-label="Закрыть попап" class="popup__close-button popup__close-button_type_edit"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="popupForm" class="popup__form">
+      <form name="popupFormEdit" class="popup__form popup__form_type_edit">
         <input type="text" class="popup__input popup__input_type_name" id="profile-name" name="inputName" placeholder="Имя">
         <input type="text" class="popup__input popup__input_type_description" id="profile-description" name="inputDescription" placeholder="О себе">
-        <button type="submit" class="popup__submit-button">Сохранить</button>
+        <button type="submit" class="popup__submit-button popup__submit-button_type_edit">Сохранить</button>
       </form>
     </div>
   </div>
+
+  <div class="popup popup_type_add">
+    <div class="popup__container">
+      <button type="button" aria-label="Закрыть попап" class="popup__close-button popup__close-button_type_add"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form name="popupFormAdd" class="popup__form popup__form_type_add">
+        <input type="text" class="popup__input popup__input_type_title" id="element-title" name="inputTitle" placeholder="Название">
+        <input type="url" class="popup__input popup__input_type_link" id="element-link" name="inputLink" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__submit-button popup__submit-button_type_add">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="popup popup_type_image">
+    <figure class="popup__figure">
+      <button type="button" aria-label="Закрыть попап" class="popup__close-button popup__close-button_type_image"></button>
+      <img class="popup__image">
+      <figcaption class="popup__figcaption"></figcaption>
+    </figure>
+  </div>
+
   <script src="./scripts/index.js"></script>
 </body>
 </html>
