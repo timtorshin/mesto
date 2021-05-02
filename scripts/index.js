@@ -151,5 +151,4 @@ function closePopupImage() {
   popupOpenImage.classList.remove('popup_opened');
 }
 
-popupOpenImage.addEventListener('click', openPopupImage);
 popupCloseImage.addEventListener('click', closePopupImage);
