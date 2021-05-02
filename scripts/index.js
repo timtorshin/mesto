@@ -45,6 +45,12 @@ const initialElements = [
   }
 ];
 
+const popupOpenImage = document.querySelector('.popup_type_image');
+const popupCloseImage = document.querySelector('.popup__close-button_type_image');
+
+const popupPhoto = document.querySelector('.popup__image');
+const popupFigcaption = document.querySelector('.popup__figcaption');
+
 //Функция открытия всплывающего окна редактирования профиля
 function openPopupEdit() {
   popupEdit.classList.add('popup_opened');
@@ -90,6 +96,13 @@ function createElement(item) {
     evt.target.closest('.element').remove();
   });
 
+  elementLink.addEventListener('click', function() {
+    popupPhoto.src = item.link;
+    popupFigcaption.textContent = item.name;
+
+    openPopupImage();
+  });
+
   return newElement;
 }
 
@@ -127,3 +140,16 @@ function formSubmitHandlerAdd(evt) {
 popupOpenAdd.addEventListener('click', openPopupAdd);
 popupCloseAdd.addEventListener('click', closePopupAdd);
 popupFormAdd.addEventListener('submit', formSubmitHandlerAdd);
+
+//Функция открытия просмотра фотографии
+function openPopupImage() {
+  popupOpenImage.classList.add('popup_opened');
+}
+
+//Функция закрытия просмотра фотографии
+function closePopupImage() {
+  popupOpenImage.classList.remove('popup_opened');
+}
+
+popupOpenImage.addEventListener('click', openPopupImage);
+popupCloseImage.addEventListener('click', closePopupImage);
