@@ -36,9 +36,9 @@
     <div class="popup__container">
       <button type="button" aria-label="Закрыть попап" class="popup__close-button popup__close-button_type_edit"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form name="popupFormEdit" class="popup__form popup__form_type_edit">
-        <input type="text" class="popup__input popup__input_type_name" id="profile-name" name="inputName" placeholder="Имя">
-        <input type="text" class="popup__input popup__input_type_description" id="profile-description" name="inputDescription" placeholder="О себе">
+      <form name="popup-form-edit" class="popup__form popup__form_type_edit">
+        <input type="text" class="popup__input popup__input_type_name" id="profile-name" name="input-name" placeholder="Имя" required>
+        <input type="text" class="popup__input popup__input_type_description" id="profile-description" name="input-description" placeholder="О себе" required>
         <button type="submit" class="popup__submit-button popup__submit-button_type_edit">Сохранить</button>
       </form>
     </div>
@@ -48,9 +48,9 @@
     <div class="popup__container">
       <button type="button" aria-label="Закрыть попап" class="popup__close-button popup__close-button_type_add"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form name="popupFormAdd" class="popup__form popup__form_type_add">
-        <input type="text" class="popup__input popup__input_type_title" id="element-title" name="inputTitle" placeholder="Название">
-        <input type="url" class="popup__input popup__input_type_link" id="element-link" name="inputLink" placeholder="Ссылка на картинку">
+      <form name="popup-form-add" class="popup__form popup__form_type_add">
+        <input type="text" class="popup__input popup__input_type_title" id="element-title" name="input-title" placeholder="Название" required>
+        <input type="url" class="popup__input popup__input_type_link" id="element-link" name="input-link" placeholder="Ссылка на картинку" required>
         <button type="submit" class="popup__submit-button popup__submit-button_type_add">Создать</button>
       </form>
     </div>
@@ -59,14 +59,14 @@
   <div class="popup popup_type_image">
     <figure class="popup__figure">
       <button type="button" aria-label="Закрыть попап" class="popup__close-button popup__close-button_type_image"></button>
-      <img class="popup__image">
+      <img src="#" alt="#" class="popup__image">
       <figcaption class="popup__figcaption"></figcaption>
     </figure>
   </div>
 
   <template id="element-template">
     <article class="element">
-      <img class="element__image">
+      <img src="#" alt="#" class="element__image">
       <div class="element__caption">
         <h2 class="element__title"></h2>
         <button type="button" aria-label="Поставить лайк" class="element__like-button"></button>
