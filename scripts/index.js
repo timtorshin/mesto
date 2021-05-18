@@ -17,32 +17,6 @@ const inputTitle = document.querySelector('#element-title');
 const inputLink = document.querySelector('#element-link');
 const elementsContainer = document.querySelector('.elements');
 const elementTemplate = document.querySelector('#element-template');
-const initialElements = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 const popupOpenImage = document.querySelector('.popup_type_image');
 const popupCloseImage = document.querySelector('.popup__close-button_type_image');
@@ -53,11 +27,33 @@ const popupFigcaption = document.querySelector('.popup__figcaption');
 //Функция открытия всплывающего окна
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+  popupEdit.addEventListener('mousedown', handleOverlayClick);
+  popupAdd.addEventListener('mousedown', handleOverlayClick);
+  popupOpenImage.addEventListener('mousedown', handleOverlayClick);
+  document.addEventListener('keydown', closeOnEscape);
 }
 
 //Функция закрытия всплывающего окна
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
+  popupEdit.removeEventListener('mousedown', handleOverlayClick);
+  popupAdd.removeEventListener('mousedown', handleOverlayClick);
+  popupOpenImage.removeEventListener('mousedown', handleOverlayClick);
+  document.removeEventListener('keydown', closeOnEscape);
+}
+
+//Функция закрытия всплывающего окна при нажатии за его пределами
+function handleOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    closePopup(evt.target);
+  }
+}
+
+//Функция закрытия всплывающего окна при нажатии на esc
+function closeOnEscape(evt) {
+  if (evt.key === 'Escape') {
+    closePopup(popupEdit) || closePopup(popupAdd) || closePopup(popupOpenImage);
+  }
 }
 
 //Открытие окна редактирования профиля
@@ -153,4 +149,12 @@ function createElement(item) {
 initialElements.forEach(function(currentItem) {
   const newItem = createElement(currentItem);
   elementsContainer.append(newItem);
+});
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inputErrorClass: 'popup__input_type_error',
+  errorActiveClass: 'popup__input-error_active'
 });
