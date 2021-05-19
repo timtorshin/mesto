@@ -12,6 +12,7 @@ const popupAdd = document.querySelector('.popup_type_add');
 const popupFormAdd = document.querySelector('.popup__form_type_add');
 const popupOpenAdd = document.querySelector('.profile__add-button');
 const popupCloseAdd = document.querySelector('.popup__close-button_type_add');
+const popupSubmitAdd = document.querySelector('.popup__submit-button_type_add');
 
 const inputTitle = document.querySelector('#element-title');
 const inputLink = document.querySelector('#element-link');
@@ -27,32 +28,28 @@ const popupFigcaption = document.querySelector('.popup__figcaption');
 //Функция открытия всплывающего окна
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  popupEdit.addEventListener('mousedown', handleOverlayClick);
-  popupAdd.addEventListener('mousedown', handleOverlayClick);
-  popupOpenImage.addEventListener('mousedown', handleOverlayClick);
+  document.addEventListener('mousedown', handleOverlayClick);
   document.addEventListener('keydown', closeOnEscape);
 }
 
 //Функция закрытия всплывающего окна
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  popupEdit.removeEventListener('mousedown', handleOverlayClick);
-  popupAdd.removeEventListener('mousedown', handleOverlayClick);
-  popupOpenImage.removeEventListener('mousedown', handleOverlayClick);
+  document.removeEventListener('mousedown', handleOverlayClick);
   document.removeEventListener('keydown', closeOnEscape);
 }
 
 //Функция закрытия всплывающего окна при нажатии за его пределами
 function handleOverlayClick(evt) {
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt.target);
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
 //Функция закрытия всплывающего окна при нажатии на esc
 function closeOnEscape(evt) {
   if (evt.key === 'Escape') {
-    closePopup(popupEdit) || closePopup(popupAdd) || closePopup(popupOpenImage);
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
@@ -100,11 +97,10 @@ function handleAddFormSubmit(evt) {
     name: inputTitle.value,
     link: inputLink.value
   };
-  inputTitle.value = '';
-  inputLink.value = '';
 
+  popupFormAdd.reset();
   elementsContainer.prepend(createElement(oneMoreItem));
-
+  popupSubmitAdd.disabled = true;
   closePopup(popupAdd);
 }
 
