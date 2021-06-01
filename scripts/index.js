@@ -2,6 +2,7 @@ const popupEdit = document.querySelector('.popup_type_edit');
 const popupFormEdit = document.querySelector('.popup__form_type_edit')
 const popupOpenEdit = document.querySelector('.profile__edit-button');
 const popupCloseEdit = document.querySelector('.popup__close-button_type_edit');
+const popupSubmitEdit = document.querySelector('.popup__submit-button_type_edit');
 
 const inputName = document.querySelector('.popup__input_type_name');
 const inputDescription = document.querySelector('.popup__input_type_description');
@@ -59,6 +60,11 @@ popupOpenEdit.addEventListener('click', function() {
 
   inputName.value = profileName.textContent;
   inputDescription.value = profileDescription.textContent;
+
+  hideInputError(popupFormEdit, inputName, config);
+  hideInputError(popupFormEdit, inputDescription, config);
+
+  popupSubmitEdit.disabled = false;
 });
 
 //Закрытие окна редактирования профиля
@@ -82,6 +88,11 @@ popupFormEdit.addEventListener('submit', handleEditFormSubmit);
 //Открытие окна добавления карточек
 popupOpenAdd.addEventListener('click', function() {
   openPopup(popupAdd);
+
+  popupFormAdd.reset();
+
+  hideInputError(popupFormAdd, inputTitle, config);
+  hideInputError(popupFormAdd, inputLink, config);
 });
 
 //Закрытие окна добавления карточек
@@ -147,10 +158,12 @@ initialElements.forEach(function(currentItem) {
   elementsContainer.append(newItem);
 });
 
-enableValidation({
+const config = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__submit-button',
   inputErrorClass: 'popup__input_type_error',
   errorActiveClass: 'popup__input-error_active'
-});
+}
+
+enableValidation(config);
