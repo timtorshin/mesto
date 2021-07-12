@@ -1,10 +1,14 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
-  constructor({ popupSelector }, formSubmit) {
+  constructor({ popupSelector }, showDefaultButton, showLoadingButton, formSubmit) {
     super({ popupSelector });
     this._formSubmit = formSubmit;
     this._inputList = Array.from(this.form.querySelectorAll('.popup__input'));
+    this._popupSubmitButton = this._popupElement.querySelector('.popup__submit-button');
+    this.showDefaultButton = showDefaultButton;
+    this._showLoadingButton = showLoadingButton;
+    this.other = null;
   }
 
   _getInputValues() {
@@ -15,10 +19,14 @@ export default class PopupWithForm extends Popup {
     return this._inputValues;
   }
 
+  setButtonCondition(text) {
+    this._popupSubmitButton.textContent = text;
+  }
+
   _handleFormSubmit(evt) {
     evt.preventDefault();
+    this.setButtonCondition(this._showLoadingButton);
     this._formSubmit(this._getInputValues());
-    this.close();
   }
 
   setEventListeners() {
@@ -30,5 +38,6 @@ export default class PopupWithForm extends Popup {
   close() {
     super.close();
     this.form.reset();
+    this.setButtonCondition(this.showDefaultButton);
   }
 }
