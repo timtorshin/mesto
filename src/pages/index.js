@@ -26,14 +26,6 @@ const config = {
   errorActiveClass: 'popup__input-error_active'
 }
 
-const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
-  headers: {
-    authorization: 'b64fa093-d6bd-41e5-84d7-c528a8e6ffa0',
-    'Content-Type': 'application/json'
-  }
-});
-
 let myUserId = null;
 
 function createCard(item) {
@@ -57,6 +49,14 @@ const cardSection = new Section({
   renderer: (item) => cardSection.addInitialItem(createCard(item))
 }, '.elements');
 
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
+  headers: {
+    authorization: 'b64fa093-d6bd-41e5-84d7-c528a8e6ffa0',
+    'Content-Type': 'application/json'
+  }
+});
+
 const popupAdd = new PopupWithForm(
   { popupSelector: '.popup_type_add' },
   "Создать",
@@ -64,7 +64,7 @@ const popupAdd = new PopupWithForm(
   (inputData) => {
     api.addNewCard(inputData)
       .then((result) => {
-        cardSection.addItem(result);
+        cardSection.addItem(createCard(result));
         popupAdd.close();
       })
       .catch((err) => {
@@ -112,7 +112,7 @@ const popupAvatar = new PopupWithForm(
   (inputData) => {
     api.updateAvatar(inputData)
       .then((result) => {
-        avatar.src = result.avatar;
+        profileInfo.setUserAvatar(result);
         popupAvatar.close();
       })
       .catch((err) => {
