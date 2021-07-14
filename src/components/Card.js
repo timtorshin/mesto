@@ -38,13 +38,13 @@ export default class Card {
 
   _handleLikeCount() {
     if (this._likeButton.classList.contains('element__like-button_active')) {
-      this._removeLike().then((result) => {
-        this._likeCounter.textContent = result;
+      this._removeLike().then((data) => {
+        this._likeCounter.textContent = data.likes.length;
         this._handlePutLike();
       }).catch((err) => { console.log(err); });
     } else {
-      this._addLike().then((result) => {
-        this._likeCounter.textContent = result;
+      this._addLike().then((data) => {
+        this._likeCounter.textContent = data.likes.length;
         this._handlePutLike();
       }).catch((err) => { console.log(err); });
     }
