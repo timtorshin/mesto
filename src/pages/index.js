@@ -33,16 +33,43 @@ function createCard(item) {
     item,
     '#element-template',
     myUserId,
-    () => api.putLike(card.id),
-    () => api.deleteLike(card.id),
+    () => { handleLikeCard(item, card); },
+    () => { handleDeleteLike(item, card); },
     () => popupImageOpen.open(item),
-    (id, element) => {
-      popupConfirm.other = { id, element };
+    () => {
       popupConfirm.open();
+      popupConfirm.card = card;
     }
   );
   const cardElement = card.generateCard();
   return cardElement;
+}
+
+function handleLikeCard(item, card) {
+  api.putLike(item._id)
+    .then(data => card.setLikesInfo(data.likes.length))
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function handleDeleteLike(item, card) {
+  api.deleteLike(item._id)
+    .then(data => card.setLikesInfo(data.likes.length))
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function handleDeleteCard(card) {
+  api.removeCard(card.id)
+    .then(() => {
+      card.handleRemoveCard();
+      popupConfirm.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 const cardSection = new Section({
@@ -126,14 +153,7 @@ const popupConfirm = new PopupWithForm(
   "Да",
   "Удаление...",
   () => {
-    api.removeCard(popupConfirm.other.id)
-      .then(() => {
-        popupConfirm.other.element.remove();
-        popupConfirm.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    handleDeleteCard(popupConfirm.card);
   }
 );
 
@@ -168,9 +188,8 @@ popupOpenAvatar.addEventListener('click', () => {
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userdata, cards]) => {
-    userCurrentName.textContent = userdata.name;
-    userCurrentDescription.textContent = userdata.about;
-    userCurrentAvatar.src = userdata.avatar;
+    profileInfo.setUserInfo(userdata);
+    profileInfo.setUserAvatar(userdata);
     myUserId = userdata;
     cardSection.renderItems(cards);
   })

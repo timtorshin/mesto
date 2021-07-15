@@ -28,30 +28,24 @@ export default class Card {
     this._elementTitle = this._element.querySelector('.element__title');
   }
 
-  _handlePutLike() {
-    this._likeButton.classList.toggle('element__like-button_active');
-  }
-
-  _handleRemoveCard() {
+  handleRemoveCard() {
     this._element.remove();
+    this._element = null;
   }
 
-  _handleLikeCount() {
+  setLikesInfo(likeAmount) {
+    this._likeButton.classList.toggle('element__like-button_active');
+    this._likeCounter.textContent = likeAmount;
+  }
+
+  _clickLike() {
     if (this._likeButton.classList.contains('element__like-button_active')) {
-      this._removeLike().then((data) => {
-        this._likeCounter.textContent = data.likes.length;
-        this._handlePutLike();
-      }).catch((err) => { console.log(err); });
-    } else {
-      this._addLike().then((data) => {
-        this._likeCounter.textContent = data.likes.length;
-        this._handlePutLike();
-      }).catch((err) => { console.log(err); });
-    }
+      this._removeLike();
+    } else this._addLike();
   }
 
   _setEventListeners() {
-    this._likeButton.addEventListener('click', () => this._handleLikeCount());
+    this._likeButton.addEventListener('click', () => this._clickLike());
     this._deleteButton.addEventListener('click', () => this._confirm(this.id, this._element));
     this._elementLink.addEventListener('click', () => this._handleCardClick());
   }
@@ -69,7 +63,7 @@ export default class Card {
       this._deleteButton.remove();
     }
     if (this._data.likes.find((item) => item._id === this._idHolder._id)) {
-      this._handlePutLike();
+      this._likeButton.classList.add('element__like-button_active');
     }
 
     return this._element;
