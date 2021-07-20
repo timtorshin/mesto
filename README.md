@@ -16,4 +16,4 @@
 
 ## Ссылка на GitHub Pages:
 
-[Проектная работа "Mesto"](https://timtorshin.github.io/mesto/index.html)
+[Проектная работа "Mesto"](https://timtorshin.github.io/mesto/)
